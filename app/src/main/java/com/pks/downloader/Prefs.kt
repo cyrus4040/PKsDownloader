@@ -34,10 +34,21 @@ object Prefs {
         treeUri = s.getString("tree_uri", null)
     }
 
+    @JvmName("applyQuality")
     fun setQuality(v: VideoQuality) { quality = v; sp?.edit()?.putString("quality", v.name)?.apply() }
+
+    @JvmName("applyFormat")
     fun setFormat(v: Format) { format = v; sp?.edit()?.putString("format", v.name)?.apply() }
+
+    @JvmName("applyTheme")
     fun setTheme(v: ThemeMode) { theme = v; sp?.edit()?.putString("theme", v.name)?.apply() }
+
+    @JvmName("applyNotifications")
     fun setNotifications(v: Boolean) { notifications = v; sp?.edit()?.putBoolean("notifications", v)?.apply() }
+
+    @JvmName("applyClipboard")
     fun setClipboard(v: Boolean) { clipboard = v; sp?.edit()?.putBoolean("clipboard", v)?.apply() }
+
+    @JvmName("applyTreeUri")
     fun setTreeUri(v: String?) { treeUri = v; sp?.edit()?.putString("tree_uri", v)?.apply() }
 }
