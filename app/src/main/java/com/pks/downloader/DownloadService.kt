@@ -185,7 +185,7 @@ class DownloadService : Service() {
         title: String, pct: Int, indeterminate: Boolean, text: String? = null
     ): Notification =
         NotificationCompat.Builder(this, CH_PROGRESS)
-            .setSmallIcon(android.R.drawable.stat_sys_download)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
             .setContentText(if (indeterminate) "Starting..." else (text ?: "$pct%"))
             .setProgress(100, pct, indeterminate)
@@ -204,10 +204,10 @@ class DownloadService : Service() {
 
     private fun doneNotification(title: String, ok: Boolean, error: String?): Notification =
         NotificationCompat.Builder(this, CH_DONE)
-            .setSmallIcon(
-                if (ok) android.R.drawable.stat_sys_download_done
-                else android.R.drawable.stat_notify_error
-            )
+        .setSmallIcon(
+        if (ok) R.drawable.ic_notification_done
+        else R.drawable.ic_notification_error
+                )
             .setContentTitle(if (ok) "Download complete" else "Download stopped")
             .setContentText(if (ok) title else (error ?: title))
             .setAutoCancel(true)
