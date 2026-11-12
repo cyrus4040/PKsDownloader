@@ -154,7 +154,7 @@ class DownloadService : Service() {
             } catch (e: YoutubeDL.CanceledException) {
                 error = "Cancelled"
             } catch (e: Exception) {
-                error = "Download failed: ${e.message?.take(160)}"
+                 error = ErrorHints.friendlyDownload(e.message ?: "")
             } finally {
                 tmp.deleteRecursively()
                 Downloader.message = if (ok) "Saved successfully" else error
