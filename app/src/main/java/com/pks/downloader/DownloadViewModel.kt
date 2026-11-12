@@ -109,3 +109,4 @@ class DownloadViewModel(app: Application) : AndroidViewModel(app) {
         meta = null
         url = ""
     }
+}
