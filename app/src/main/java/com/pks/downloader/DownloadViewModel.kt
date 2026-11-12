@@ -80,7 +80,7 @@ class DownloadViewModel(app: Application) : AndroidViewModel(app) {
                     durationSec = info.duration
                 )
             } catch (e: Exception) {
-                message = "Could not read this link: ${e.message?.take(160)}"
+            message = ErrorHints.friendly(e.message ?: "")
             } finally {
                 fetching = false
             }
