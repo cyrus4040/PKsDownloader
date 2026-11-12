@@ -12,5 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - {uses: actions/setup-java@v4, with: {distribution: temurin, java-version: 17}}
       - {uses: gradle/actions/setup-gradle@v4, with: {gradle-version: 8.7}}
-      - {name: Build debug APK, run: 'cd "$(dirname "$(find . -name settings.gradle.kts -not -path "./.git/*" | head -1)")" && gradle assembleDebug'}
+      - {name: Find project, id: find, run: 'echo "dir=$(dirname "$(find . -name settings.gradle.kts -not -path "./.git/*" | head -1)")" >> "$GITHUB_OUTPUT"'}
+      - {name: Build debug APK, working-directory: '${{ steps.find.outputs.dir }}', run: 'gradle assembleDebug --console=plain --warning-mode none > "$GITHUB_WORKSPACE/build.log" 2>&1'}
+      - {name: Show errors, if: failure(), run: 'echo "PROJECT DIR = ${{ steps.find.outputs.dir }}"; ls -la ${{ steps.find.outputs.dir }}; grep -E -m 40 "Caused by|What went wrong|Could not|e: |error:|Exception" build.log | cut -c1-220; echo ----; tail -n 25 build.log | cut -c1-220'}
       - {uses: actions/upload-artifact@v4, with: {name: PKs-Downloader-APK, path: '**/app-debug.apk'}}
