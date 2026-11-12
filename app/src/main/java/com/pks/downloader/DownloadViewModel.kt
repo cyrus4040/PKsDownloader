@@ -69,6 +69,8 @@ class DownloadViewModel(app: Application) : AndroidViewModel(app) {
                 val info = withContext(Dispatchers.IO) {
                     val req = YoutubeDLRequest(link)
                     req.addOption("--no-playlist")
+                    req.addOption("--no-warnings")
+                    req.addOption("--socket-timeout", "10")
                     YoutubeDL.getInstance().getInfo(req)
                 }
                 quality = Prefs.quality
