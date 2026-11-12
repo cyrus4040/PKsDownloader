@@ -105,12 +105,7 @@ class DownloadViewModel(app: Application) : AndroidViewModel(app) {
             .putExtra(DownloadService.EXTRA_QUALITY, quality.name)
             .putExtra(DownloadService.EXTRA_FORMAT, format.name)
         ContextCompat.startForegroundService(ctx, i)
-    }
-    /** Clears the pasted link and hides the video card. */
-    fun clearVideo() {
-        url = ""
+        // Intent already holds the link, so the preview card can go away now.
         meta = null
-        if (!Downloader.downloading) message = null
+        url = ""
     }
-    fun cancel() = Downloader.cancel()
-}
